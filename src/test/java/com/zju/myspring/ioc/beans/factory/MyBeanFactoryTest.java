@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class MyBeanFactoryTest {
     @Test
-    public void testOne(){
+    public void testOne() throws Exception{
         /**
          * 先创建一个工厂
          */
