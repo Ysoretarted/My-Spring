@@ -18,7 +18,13 @@ public class PropertyValues {
      */
     private final List<PropertyValue> propertyValueList= new ArrayList<>();
 
+    //TODO   这里可以进行判重操作
     public void addPropertyValue(PropertyValue propertyValue){
+        String field = propertyValue.getName();
+        for(PropertyValue propertyValue1 : propertyValueList){
+            if(field.equals(propertyValue1.getName()))
+                return ;
+        }
         this.propertyValueList.add(propertyValue);
     }
 }

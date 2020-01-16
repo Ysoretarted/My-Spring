@@ -21,6 +21,9 @@ public class AbstractBeanFactory implements BeanFactory {
                     + beanName + " is not defined");
         }
         Object bean = beanDefinition.getBean();
+        /**
+         * 下面的情况只是 执行了registerBeanDefinition  但没有绑定 bean
+         */
         if(null == bean){
             bean = doCreateBean(beanDefinition);
             /**

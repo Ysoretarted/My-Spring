@@ -36,6 +36,11 @@ public class AutowireCapableBeanFactoryTest {
 
         PropertyValues propertyValues = new PropertyValues();
         propertyValues.addPropertyValue(new PropertyValue("attribute","这是HelloService的成员属性"));
+        /**
+         * 再添加属性键值对的时候，进行了判重，所以输出为上面那句话
+         *   没有进行判重的话，  会有两个输出
+         */
+        propertyValues.addPropertyValue(new PropertyValue("attribute","AAAAA"));
 
         beanDefinition.setBeanClass(HelloServiceImpl.class);
         /*beanDefinition.setBeanClassName("com.zju.myspring.ioc.HelloServiceImpl");*/
@@ -45,5 +50,20 @@ public class AutowireCapableBeanFactoryTest {
 
         HelloService helloService = (HelloService)beanFactory.getBean("HelloService");
         helloService.helloWorld();
+        HelloService helloService1 = (HelloService)beanFactory.getBean("HelloService");
+        helloService1.helloWorld();
+
+        /**
+         * 这样就覆盖了 会输出AAA
+         */
+        /*PropertyValues propertyValues1 = new PropertyValues();
+        propertyValues1.addPropertyValue(new PropertyValue("attribute","AAAA"));
+        BeanDefinition beanDefinition1 = new BeanDefinition();
+        beanDefinition1.setPropertyValues(propertyValues1);
+        beanDefinition1.setBeanClass(HelloServiceImpl.class);
+        beanFactory.registerBeanDefinition("HelloService", beanDefinition1);
+        HelloService helloService1 = (HelloService)beanFactory.getBean("HelloService");
+        helloService1.helloWorld();*/
+
     }
 }
