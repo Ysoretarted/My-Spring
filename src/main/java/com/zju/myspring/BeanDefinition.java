@@ -1,5 +1,6 @@
 package com.zju.myspring;
 
+import com.zju.myspring.ioc.beans.PropertyValues;
 import lombok.Data;
 
 /**
@@ -14,8 +15,8 @@ public class BeanDefinition {
 
     private String beanClassName;
 
-    //TODO     这个字段用来保存 bean 的一些属性
-    /*private PropertyValues propertyValues;*/
+    //TODOxx     这个字段用来保存 bean 的一些属性
+    private PropertyValues propertyValues;
 
 
     /**

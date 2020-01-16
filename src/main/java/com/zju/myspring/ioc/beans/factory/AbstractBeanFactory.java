@@ -23,6 +23,10 @@ public class AbstractBeanFactory implements BeanFactory {
         Object bean = beanDefinition.getBean();
         if(null == bean){
             bean = doCreateBean(beanDefinition);
+            /**
+             *   TODO 这里也就是说 父类可以调用子类的方法  错的（这只是向上转型的结果）
+             */
+            applyPropertyValue(bean,beanDefinition);
 
             //TODo
             /*bean = initializeBean(bean, name);*/
@@ -52,5 +56,18 @@ public class AbstractBeanFactory implements BeanFactory {
 
     protected Object createBeanInstance(BeanDefinition beanDefinition) throws Exception{
         return beanDefinition.getBeanClass().newInstance();
+    }
+
+    /**
+     * 通过反射  调用method 的invoke方法是，会有一些异常要处理，这里抛下异常
+     * @param bean
+     * @param beanDefinition
+     * @throws Exception
+     */
+    protected void applyPropertyValue(Object bean, BeanDefinition beanDefinition) throws Exception{
+        /**
+         * 这句话并没有输出，应该定义的是  AutowireCapableBeanFactory类型的
+         */
+        System.out.println("这个是" + this.getClass() + "的applyPropertyValue方法");
     }
 }
