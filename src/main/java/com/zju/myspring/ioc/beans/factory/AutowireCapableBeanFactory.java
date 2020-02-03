@@ -17,6 +17,10 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
      */
     @Override
     protected void applyPropertyValue(Object bean, BeanDefinition beanDefinition) throws Exception {
+        if(null == beanDefinition.getPropertyValues()){
+            System.out.println(getClass() + "当前的"+beanDefinition+"的属性为空");
+            return;
+        }
         for (PropertyValue propertyValue : beanDefinition.getPropertyValues().getPropertyValueList()) {
             Object value = propertyValue.getValue();
             String attribute = propertyValue.getName();

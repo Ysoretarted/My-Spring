@@ -16,7 +16,7 @@ public class BeanDefinition {
     private String beanClassName;
 
     //TODOxx     这个字段用来保存 bean 的一些属性
-    private PropertyValues propertyValues;
+    private PropertyValues propertyValues = new PropertyValues();
 
 
     /**
