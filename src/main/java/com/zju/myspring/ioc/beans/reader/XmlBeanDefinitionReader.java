@@ -1,6 +1,7 @@
 package com.zju.myspring.ioc.beans.reader;
 
 import com.zju.myspring.BeanDefinition;
+import com.zju.myspring.BeanReference;
 import com.zju.myspring.ioc.beans.PropertyValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -93,6 +94,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader{
         processProperty(element,beanDefinition);
         /**
          * put 进去  是为了获取（根据name 获取）
+         *
+         * 这里一定要注册
          */
         getRegistry().put(name, beanDefinition);
     }
@@ -117,6 +120,16 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader{
                  */
                 if(value != null && value.length() > 0)
                     beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
+                else{
+                    String ref = propertyEle.getAttribute("ref");
+                    if(null == ref || ref.length() == 0){
+                        throw new IllegalArgumentException("Configuration problem: <property> element for property " + name +" must specify a ref or value");
+                    }
+
+                    BeanReference beanReference = new BeanReference();
+                    beanReference.setName(ref);
+                    beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name,beanReference));
+                }
             }
         }
     }

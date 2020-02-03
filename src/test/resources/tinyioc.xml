@@ -15,5 +15,9 @@
 	 http://www.springframework.org/schema/context/spring-context-2.5.xsd">
     <bean id="helloWorldService" class="com.zju.myspring.ioc.HelloServiceImpl">
         <property name="attribute" value="Hello World123zcz!"></property>
+        <property name="outputService" ref="outputServiceImpl"></property>
+        //上面的ref的名字  要和下面的bean 的id 对应起来（但顺序没关系)
     </bean>
+
+    <bean id = "outputServiceImpl" class="com.zju.myspring.ioc.OutputServiceImpl"></bean>
 </beansASAA>

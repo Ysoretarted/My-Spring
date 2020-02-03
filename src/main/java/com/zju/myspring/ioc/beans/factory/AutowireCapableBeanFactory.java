@@ -1,6 +1,7 @@
 package com.zju.myspring.ioc.beans.factory;
 
 import com.zju.myspring.BeanDefinition;
+import com.zju.myspring.BeanReference;
 import com.zju.myspring.ioc.beans.PropertyValue;
 
 import java.lang.reflect.Field;
@@ -17,12 +18,20 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
      */
     @Override
     protected void applyPropertyValue(Object bean, BeanDefinition beanDefinition) throws Exception {
-        if(null == beanDefinition.getPropertyValues()){
-            System.out.println(getClass() + "当前的"+beanDefinition+"的属性为空");
-            return;
-        }
+
+        //TODO
+        /*if (bean instanceof BeanFactoryAware) {
+            ((BeanFactoryAware) bean).setBeanFactory(this);
+        }*/
         for (PropertyValue propertyValue : beanDefinition.getPropertyValues().getPropertyValueList()) {
             Object value = propertyValue.getValue();
+            if(value instanceof BeanReference){
+                BeanReference beanReference = (BeanReference) value;
+                /**
+                 * 获取引用bean 的实例，  等会通过反射赋值给另外一个bean
+                 */
+                value = getBean(beanReference.getName());
+            }
             String attribute = propertyValue.getName();
             /**
              * 获取set方法  如 setName
