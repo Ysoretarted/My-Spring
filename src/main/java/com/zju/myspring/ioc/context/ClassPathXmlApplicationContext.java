@@ -40,17 +40,6 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
     }
 
     @Override
-    public Object getBean(String beanName) throws Exception {
-        return super.getBean(beanName);
-    }
-
-    @Override
-    public void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception{
-
-
-    }
-
-    @Override
     protected void loadBeanDefinitions(AbstractBeanFactory abstractBeanFactory) throws Exception {
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
         xmlBeanDefinitionReader.loadBeanDefinitions("tinyioc.xml");
