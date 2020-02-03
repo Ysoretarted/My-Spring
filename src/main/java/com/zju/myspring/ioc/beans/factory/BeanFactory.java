@@ -1,6 +1,9 @@
 package com.zju.myspring.ioc.beans.factory;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import com.zju.myspring.BeanDefinition;
+
+import java.io.IOException;
 
 /**
  * @author zcz
@@ -14,5 +17,5 @@ public interface BeanFactory {
     Object getBean(String beanName) throws  Exception;
 
    /* void registerBean();*/
-    void registerBeanDefinition(String name, BeanDefinition beanDefinition);
+    void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception;
 }
