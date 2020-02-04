@@ -46,7 +46,7 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
                  */
                 setMethod.invoke(bean,value);
             } catch (NoSuchMethodException e) {
-                System.out.println(this.getClass() + "  并没有这样的set方法");
+                System.out.println(this.getClass() + "  并没有这样的set" + attribute+"方法");
                 try {
                     Field field = bean.getClass().getDeclaredField(attribute);
                     field.setAccessible(true);

@@ -2,6 +2,7 @@ package com.zju.myspring.ioc.context;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import com.zju.myspring.ioc.HelloService;
+import com.zju.myspring.ioc.HelloServiceImpl;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -13,8 +14,8 @@ import java.io.IOException;
 public class ClassPathXmlApplicationContextTest {
     @Test
     public void testSix() throws Exception {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("tinyioc.xml");
-        HelloService helloService = (HelloService)context.getBean("helloWorldService");
+        ApplicationContext context = new ClassPathXmlApplicationContext("tinyioc.xml");
+        HelloService helloService = (HelloServiceImpl)context.getBean("helloWorldService");
         helloService.helloWorld();
     }
 
