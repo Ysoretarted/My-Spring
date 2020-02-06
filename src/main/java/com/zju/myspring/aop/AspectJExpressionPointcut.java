@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
+/**切点表达式，调用aspectj的类库，匹配要拦截方法
  * @author zcz
  * @CreateTime 2020/2/5 12:27
  */

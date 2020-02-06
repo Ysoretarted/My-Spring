@@ -20,4 +20,14 @@
     </bean>
 
     <bean id = "outputServiceImpl" class="com.zju.myspring.ioc.OutputServiceImpl"></bean>
+
+    <bean id ="autoProxyCreator" class="com.zju.myspring.aop.AspectJAwareAdvisorAutoProxyCreator"></bean>
+
+    <bean id="timeInterceptor" class="com.zju.myspring.interceptor.TimeInterceptor"></bean>
+
+    <bean id ="aspectjAspect" class="com.zju.myspring.aop.AspectJExpressionPointcutAdvisor">
+        <property name="advice" ref="timeInterceptor"></property>
+        <property name="expression" value="execution(* com.zju.myspring..*.*(..))"></property>
+    </bean>
+
 </beansASAA>
