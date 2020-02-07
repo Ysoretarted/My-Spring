@@ -2,6 +2,7 @@ package com.zju.myspring.ioc.beans.factory;
 
 import com.zju.myspring.BeanDefinition;
 import com.zju.myspring.BeanReference;
+import com.zju.myspring.aop.BeanFactoryAware;
 import com.zju.myspring.ioc.beans.PropertyValue;
 
 import java.lang.reflect.Field;
@@ -19,10 +20,14 @@ public class AutowireCapableBeanFactory extends AbstractBeanFactory {
     @Override
     protected void applyPropertyValue(Object bean, BeanDefinition beanDefinition) throws Exception {
 
-        //TODO
-        /*if (bean instanceof BeanFactoryAware) {
+        /**  TODOx  这句话也要加
+         *   不加的话 AspectJAwareAdvisorAutoProxyCreator 的beanFactory成员是空的
+         *   这句话大概就是  如果要赋值属性的实例  是工厂的话,  就set一下工厂
+         *
+         */
+        if (bean instanceof BeanFactoryAware) {
             ((BeanFactoryAware) bean).setBeanFactory(this);
-        }*/
+        }
         for (PropertyValue propertyValue : beanDefinition.getPropertyValues().getPropertyValueList()) {
             Object value = propertyValue.getValue();
             if(value instanceof BeanReference){

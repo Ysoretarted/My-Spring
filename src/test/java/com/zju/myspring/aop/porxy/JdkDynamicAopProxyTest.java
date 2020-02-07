@@ -2,7 +2,7 @@ package com.zju.myspring.aop.porxy;
 
 import com.zju.myspring.aop.AdvisedSupport;
 import com.zju.myspring.aop.TargetSource;
-import com.zju.myspring.aop.proxy.JdkDynamicAopProxy;
+import com.zju.myspring.aop.proxy.JdkDynamicAopAopProxy;
 import com.zju.myspring.interceptor.TimeInterceptor;
 import com.zju.myspring.ioc.HelloService;
 import com.zju.myspring.ioc.HelloServiceImpl;
@@ -39,7 +39,7 @@ public class JdkDynamicAopProxyTest {
         advisedSupport.setTargetSource(targetSource);
         advisedSupport.setMethodInterceptor(timeInterceptor);
 
-        JdkDynamicAopProxy jdkDynamicAopProxy = new JdkDynamicAopProxy(advisedSupport);
+        JdkDynamicAopAopProxy jdkDynamicAopProxy = new JdkDynamicAopAopProxy(advisedSupport);
         HelloService helloServiceProxy = (HelloService)jdkDynamicAopProxy.getProxy();
         helloServiceProxy.helloWorld();
 

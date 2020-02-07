@@ -1,11 +1,7 @@
 package com.zju.myspring.aop.proxy;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.zju.myspring.aop.AdvisedSupport;
 import com.zju.myspring.aop.ReflectiveMethodInvocation;
-import com.zju.myspring.ioc.beans.factory.AbstractBeanFactory;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.aopalliance.intercept.MethodInterceptor;
 
 import java.lang.reflect.InvocationHandler;
@@ -17,9 +13,9 @@ import java.lang.reflect.Proxy;
  * @author zcz
  * @CreateTime 2020/2/4 14:08
  */
-public class JdkDynamicAopProxy extends AbstractProxy implements InvocationHandler {
+public class JdkDynamicAopAopProxy extends AbstractAopProxy implements InvocationHandler {
 
-    public  JdkDynamicAopProxy(AdvisedSupport advised){
+    public JdkDynamicAopAopProxy(AdvisedSupport advised){
         super(advised);
     }
 

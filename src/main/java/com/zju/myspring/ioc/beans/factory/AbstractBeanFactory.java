@@ -39,6 +39,11 @@ public class AbstractBeanFactory implements BeanFactory {
             applyPropertyValue(bean, beanDefinition);
 
             //TODo
+            /**
+             * 这里的bean  和上面的bean 是不一样的
+             * 这里的bean是经过处理的，上面的bean 仅仅是因为 为空，然后被创建出来的
+             * 这里的bean可以加一些自己的操作，比如 代理
+             */
             bean = initializeBean(bean, beanName);
 
             beanDefinition.setBean(bean);
@@ -57,7 +62,7 @@ public class AbstractBeanFactory implements BeanFactory {
 
         beanDefinition.setBean(bean);
 
-        //TODO
+        //TODOx  都行，执行一遍就行了
         /*applyPropertyValues(bean, beanDefinition);*/
 
         return bean;
@@ -94,7 +99,11 @@ public class AbstractBeanFactory implements BeanFactory {
     public List getBeansForType(Class type) throws Exception {
         List beans = new ArrayList<>();
         for (Map.Entry<String, BeanDefinition> beanDefinitionEntry : beanDefinitionMap.entrySet()) {
-            if (type.isAssignableFrom(beanDefinitionEntry.getValue().getClass())) {
+            /**
+             * beanDefinitionEntry.getValue().getClass() 这里错了（这样结果是BeanDefinition.class)
+             *   应该是 beanDefinitionEntry.getValue().getBeanClass()
+             */
+            if (type.isAssignableFrom((beanDefinitionEntry.getValue().getBeanClass()))) {
                 beans.add(getBean(beanDefinitionEntry.getKey()));
             }
         }
@@ -112,12 +121,26 @@ public class AbstractBeanFactory implements BeanFactory {
 
         // TODO  这里也可以加一下方法
         for(BeanPostProcessor beanPostProcessor : beanPostProcessors){
-            beanPostProcessor.postProcessorAfterInitialization(bean, name);
+            /**
+             * 这里少了一个 bean =
+             */
+            bean = beanPostProcessor.postProcessorAfterInitialization(bean, name);
         }
         return bean;
     }
 
     public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor){
         this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+
+    /**
+     * 根据工厂已有的 bean的Name  ，全都跑一遍 getBean()
+     * @throws Exception
+     */
+    public void preInstantiateSingletons() throws Exception{
+        for(Map.Entry<String,BeanDefinition> beanDefinitionEntry : beanDefinitionMap.entrySet()){
+            getBean(beanDefinitionEntry.getKey());
+        }
     }
 }

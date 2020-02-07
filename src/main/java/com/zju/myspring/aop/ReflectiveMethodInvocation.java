@@ -20,13 +20,13 @@ import java.lang.reflect.Method;
 public class ReflectiveMethodInvocation implements MethodInvocation {
 
     // 某个对象实例
-    private Object target;
+    protected Object target;
 
     //改对象实例的某个方法
-    private Method method;
+    protected Method method;
 
     //对应的方法所包含的参数  可能有多个，用数组，而且参数的类型也不确定
-    private Object[] arguments;
+    protected Object[] arguments;
 
 
     @Override

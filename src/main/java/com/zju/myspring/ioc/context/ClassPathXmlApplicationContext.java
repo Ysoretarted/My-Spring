@@ -36,13 +36,16 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
     public ClassPathXmlApplicationContext(String configLocation, AbstractBeanFactory abstractBeanFactory) throws Exception {
         super(abstractBeanFactory);
         this.configLocation = configLocation;
-        loadBeanDefinitions(abstractBeanFactory);
+        refresh();
     }
 
     @Override
     protected void loadBeanDefinitions(AbstractBeanFactory abstractBeanFactory) throws Exception {
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(new ResourceLoader());
-        xmlBeanDefinitionReader.loadBeanDefinitions("tinyioc.xml");
+        /**
+         * 这里写错了  配置文件的路径  不能写死的
+         */
+        xmlBeanDefinitionReader.loadBeanDefinitions(configLocation);
 
         for(Map.Entry<String,BeanDefinition>beanDefinitionEntry : xmlBeanDefinitionReader.getRegistry().entrySet()){
             abstractBeanFactory.registerBeanDefinition(beanDefinitionEntry.getKey(), beanDefinitionEntry.getValue());

@@ -24,7 +24,7 @@ public class AspectJExpressionPointcutTest {
 
     @Test
     public void testClassFilter(){
-        String expression = "execution(* us.codecraft.tinyioc.*.*(..))";
+        String expression = "execution(* com.zju.myspring..*.*(..))";
 
         AspectJExpressionPointcut aspectJExpressionPointcut = new AspectJExpressionPointcut();
         aspectJExpressionPointcut.setExpression(expression);
