@@ -19,7 +19,9 @@
         //上面的ref的名字  要和下面的bean 的id 对应起来（但顺序没关系)
     </bean>
 
-    <bean id = "outputServiceImpl" class="com.zju.myspring.ioc.OutputServiceImpl"></bean>
+    <bean id = "outputServiceImpl" class="com.zju.myspring.ioc.OutputServiceImpl">
+        <property name="helloService" ref="helloWorldService"></property>
+    </bean>
 
     <bean id ="autoProxyCreator" class="com.zju.myspring.aop.AspectJAwareAdvisorAutoProxyCreator"></bean>
 
